@@ -1,0 +1,11 @@
+---
+# tasks file for sync_sudo
+
+- name: Sync sudoers files.
+  synchronize:
+    src: etc/sudoers.d/
+    dest: '{{ sync_sudo_sudoers_dir }}'
+    delete: yes
+    recursive: yes
+    owner: no
+    group: no
