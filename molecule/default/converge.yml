@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include ansible-role-sync_sudo"
+      include_role:
+        name: "ansible-role-sync_sudo"
