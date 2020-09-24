@@ -1,0 +1,39 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+
+  tasks:
+  - name: Check the 'rsync' package status.
+    package:
+      name: rsync
+      state: present
+    check_mode: yes
+    register: pkg_status
+
+  - name: Test that the 'rsync' package is installed.
+    assert:
+      that:
+        - not pkg_status.changed
+
+  - name: Retrieve the file information for '/etc/sudoers.d/vagrant'.
+    stat:
+      path: '/etc/sudoers.d/vagrant'
+    register: remote_file
+
+  - name: Test that the '/etc/sudoers.d/vagrant' file was created correctly.
+    assert:
+      that:
+        - remote_file.stat.exists
+        - remote_file.stat.isreg
+        - remote_file.stat.path == '/etc/sudoers.d/vagrant'
+        - remote_file.stat.mode == '0440'
+        - remote_file.stat.pw_name == 'root'
+        - remote_file.stat.gr_name == 'root'
+
+  - name: Perform a sudoers file check
+    command: 'visudo -cf {{ remote_file.stat.path }}'
+    register: visudo_cmd
+    changed_when: false
+    failed_when: visudo_cmd.rc != 0
