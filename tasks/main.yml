@@ -7,5 +7,6 @@
     dest: '{{ sync_sudo_sudoers_dir }}'
     delete: yes
     recursive: yes
-    owner: no
-    group: no
+    rsync_opts:
+      - "--chmod=0440"
+      - "--chown=root:root"
