@@ -1,6 +1,6 @@
 # Ansible Role : sync_sudo
 
-[![Build Status](https://github.com/glillico/ansible-role-sync_sudo/workflows/build/badge.svg)](https://github.com/glillico/ansible-role-sync_sudo/actions?query=workflow%3Abuild)
+[![molecule](https://github.com/glillico/ansible-role-sync_sudo/workflows/molecule/badge.svg)](https://github.com/glillico/ansible-role-sync_sudo/actions?query=workflow%3Amolecule)
 
 This role syncronises the contents of the `files/etc/sudoers.d/` directory with the directory specified by `{{ sync_sudo_sudoers_dir }}` on the server.
 
