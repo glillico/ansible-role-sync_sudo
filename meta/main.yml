@@ -1,5 +1,6 @@
 galaxy_info:
-  author: Graham Lillico
+  role_name: sync_sudo
+  author: glillico
   description: Synchronize sudoers files to an ansible node.
   license: license (MIT)
   min_ansible_version: 2.4
