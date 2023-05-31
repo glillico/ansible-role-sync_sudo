@@ -2,17 +2,5 @@
 - name: Converge
   hosts: all
 
-  pre_tasks:
-    - name: Update apt cache.
-      package:
-        update_cache: true
-        cache_valid_time: 600
-      when: ansible_os_family == 'Debian'
-
-    - name: Install 'rsync' package.
-      package:
-        name: rsync
-        state: present
-
   roles:
     - role: glillico.sync_sudo

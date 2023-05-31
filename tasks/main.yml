@@ -1,12 +1,24 @@
 ---
 # tasks file for sync_sudo
 
+- name: Update apt cache.
+  package:
+    update_cache: true
+    cache_valid_time: 600
+  when: ansible_os_family == 'Debian'
+
+- name: Make sure 'rsync' package is present.
+  package:
+    name: rsync
+    state: present
+
 - name: Sync sudoers files.
   synchronize:
     src: etc/sudoers.d/
     dest: '{{ sync_sudo_sudoers_dir }}'
     delete: yes
     recursive: yes
+    owner: no
+    group: no
     rsync_opts:
-      - "--chmod=0440"
-      - "--chown=root:root"
+      - "--chmod=Fu+r,Fu-wx,Fg+r,Fg-wx,Fo-rwx"
